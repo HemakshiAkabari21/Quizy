@@ -1,8 +1,8 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/model/histroy_model.dart';
-import 'package:animated_loader_demo_flutter/screens/filter_screen/filter_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/model/histroy_model.dart';
+import 'package:quizy/screens/filter_screen/filter_screen.dart';
+import 'package:quizy/utils/const_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -284,8 +284,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
           color: AppColors.grayBackground,
           border: Border.all(color: AppColors.gray, width: 1.w),
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(16.r),
-            topLeft: Radius.circular(16.r),
+            topRight: Radius.circular(24.r),
+            topLeft: Radius.circular(24.r),
           ),
         ),
         child: Column(

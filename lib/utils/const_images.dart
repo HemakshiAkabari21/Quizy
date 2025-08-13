@@ -7,6 +7,8 @@ class AppImages {
   static const String bee = '${images}bee_img.png';
   static const String bodyBuilder = '${images}body_builder_img.png';
   static const String indFlag = '${images}ind_flag.jpg';
+  static const String chestCoin = '${images}chest_coin.png';
+  static const String sadEmoji = '${images}sad_emoji.png';
 
   static const String crossIcon = '${icons}cross_icon.svg';
   static const String fireIcon = '${icons}fire_icon.svg';

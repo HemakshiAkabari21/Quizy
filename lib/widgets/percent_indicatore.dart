@@ -1,4 +1,4 @@
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
+import 'package:quizy/app_theme/style_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';

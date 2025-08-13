@@ -1,12 +1,12 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/model/country_model.dart';
-import 'package:animated_loader_demo_flutter/screens/login_screen/login_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/main_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/register_screen/register_controller.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
-import 'package:animated_loader_demo_flutter/widgets/custom_button.dart';
-import 'package:animated_loader_demo_flutter/widgets/expaded_custom_text_filed_for_single_selection.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/model/country_model.dart';
+import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/screens/main_screen.dart';
+import 'package:quizy/screens/register_screen/register_controller.dart';
+import 'package:quizy/utils/const_images.dart';
+import 'package:quizy/widgets/custom_button.dart';
+import 'package:quizy/widgets/expaded_custom_text_filed_for_single_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -89,8 +89,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (registerController.isFirstName.value)
               Text(
                 registerController.firstNameError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
+              ).paddingOnly(bottom: 12.h,top: 8.h),
             Text('Last Name', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -124,8 +124,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (registerController.isLastName.value)
               Text(
                 registerController.lastNameError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
+              ).paddingOnly(bottom: 12.h,top: 8.h),
             Text('Email Address', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -163,8 +163,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (registerController.isEmailAddress.value)
               Text(
                 registerController.emailAddressError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
+              ).paddingOnly(bottom: 12.h,top: 8.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -192,7 +192,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ],
             ).paddingOnly(bottom: 8.h),
-
             Container(
               width: Get.width,
               decoration: BoxDecoration(
@@ -232,12 +231,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
               ),
             ).paddingOnly(bottom: registerController.isPassword.value ? 0.h : 12.h),
-
             if (registerController.isPassword.value)
               Text(
                 registerController.passwordError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
+              ).paddingOnly(bottom: 12.h,top: 8.h),
             Text('Confirm Password', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -281,8 +279,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (registerController.isConfirmPass.value)
               Text(
                 registerController.confirmPasswordError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp),
+              ).paddingOnly(bottom: 12.h,top: 8.h),
             Text('Country', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             registerController.countryList.isEmpty
                 ? Text(
@@ -319,8 +317,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (registerController.isCountry.value)
               Text(
                 registerController.countryError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 20.h),
+                style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp),
+              ).paddingOnly(bottom: 20.h,top: 8.h),
             Row(
               children: [
                 Text('I am a:', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(right: 8.w),
@@ -382,7 +380,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: AppColors.blue,
               textStyle: StyleHelper.customStyle(color: AppColors.white, size: 16.sp, family: semiBold),
               onTap: () {
-                Get.offAll(() => MainScreen(currentIndex: 0), transition: Transition.leftToRight, duration: Duration(milliseconds: 1000));
+                if(registerController.isValidate()){
+                  Get.offAll(() => MainScreen(currentIndex: 0), transition: Transition.leftToRight, duration: Duration(milliseconds: 1000));
+                }
               },
             ),
             Row(

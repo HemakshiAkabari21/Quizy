@@ -1,4 +1,4 @@
-import 'package:animated_loader_demo_flutter/model/result_model.dart';
+import 'package:quizy/model/result_model.dart';
 
 class QuizModel{
   String? question;

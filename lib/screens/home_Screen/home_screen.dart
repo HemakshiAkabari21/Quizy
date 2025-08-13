@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/model/quiz_type_model.dart';
-import 'package:animated_loader_demo_flutter/model/week_model.dart';
-import 'package:animated_loader_demo_flutter/screens/quiz_screen/quiz_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/model/quiz_type_model.dart';
+import 'package:quizy/model/week_model.dart';
+import 'package:quizy/screens/quiz_screen/quiz_screen.dart';
+import 'package:quizy/utils/const_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

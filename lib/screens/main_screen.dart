@@ -1,7 +1,7 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/screens/profile_screen/profile_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/store_screen/store_screen.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/screens/profile_screen/profile_screen.dart';
+import 'package:quizy/screens/store_screen/store_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

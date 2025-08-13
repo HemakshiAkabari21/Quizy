@@ -1,7 +1,7 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/model/country_model.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/model/country_model.dart';
+import 'package:quizy/utils/const_images.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-package com.example.animated_loader_demo_flutter;
+package com.prognostic.quizy;
 
 import io.flutter.embedding.android.FlutterActivity;
 

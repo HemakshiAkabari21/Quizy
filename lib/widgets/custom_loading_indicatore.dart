@@ -1,4 +1,4 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomLoadingIndicator extends StatefulWidget {

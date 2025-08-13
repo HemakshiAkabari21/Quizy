@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/screens/login_screen/login_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_keys.dart';
-import 'package:animated_loader_demo_flutter/widgets/common_widgets.dart';
-import 'package:animated_loader_demo_flutter/widgets/custom_loading_indicatore.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/utils/const_keys.dart';
+import 'package:quizy/widgets/common_widgets.dart';
+import 'package:quizy/widgets/custom_loading_indicatore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

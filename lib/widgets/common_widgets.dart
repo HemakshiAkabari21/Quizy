@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/model/pdf_model.dart';
-import 'package:animated_loader_demo_flutter/repository/api_services.dart';
-import 'package:animated_loader_demo_flutter/repository/network_function.dart';
-import 'package:animated_loader_demo_flutter/screens/login_screen/login_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/model/pdf_model.dart';
+import 'package:quizy/repository/api_services.dart';
+import 'package:quizy/repository/network_function.dart';
+import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/utils/const_images.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

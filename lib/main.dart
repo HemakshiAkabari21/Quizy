@@ -1,5 +1,4 @@
-import 'package:animated_loader_demo_flutter/screens/login_screen/login_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/main_screen.dart';
+import 'package:quizy/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, widget) {
         return  GetMaterialApp(
-          title: 'Demo Of BSCS',
+          title: 'Quizy',
           debugShowCheckedModeBanner: false,
           onGenerateRoute: (RouteSettings settings) {
             return GetPageRoute(page: () => const /*MainScreen(currentIndex: 0)*/LoginScreen());

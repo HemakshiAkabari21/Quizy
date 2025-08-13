@@ -1,6 +1,6 @@
 {
-    "name": "animated_loader_demo_flutter",
-    "short_name": "animated_loader_demo_flutter",
+    "name": "quizy",
+    "short_name": "quizy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

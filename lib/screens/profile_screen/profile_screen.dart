@@ -1,7 +1,8 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/screens/settings_screen/settings_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/screens/settings_screen/settings_screen.dart';
+import 'package:quizy/utils/const_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -221,7 +222,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       if (isStreak)
-                                        Icon(Icons.local_fire_department, color: Colors.orange, size: 24.sp)
+                                    SvgPicture.asset(AppImages.fireIcon, height: 24.h, width: 24.w)
+
+                               /* Icon(Icons.local_fire_department, color: Colors.orange, size: 24.sp)*/
                                       else
                                         Text(
                                           '${day.day}',
@@ -254,8 +257,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(
                               height: 60.h,
                               width: 60.w,
+                              padding: EdgeInsets.all(8.sp),
                               decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.disableButton),
-                              child: Icon(Icons.local_fire_department, color: Colors.orange, size: 34.sp),
+                              child:  SvgPicture.asset(AppImages.fireIcon, height: 30.h, width: 30.w),
                             ),
                             Expanded(
                               child: Container(

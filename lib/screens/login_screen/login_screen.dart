@@ -1,11 +1,10 @@
-import 'package:animated_loader_demo_flutter/app_theme/app_colors.dart';
-import 'package:animated_loader_demo_flutter/app_theme/style_helper.dart';
-import 'package:animated_loader_demo_flutter/screens/home_Screen/home_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/login_screen/login_controller.dart';
-import 'package:animated_loader_demo_flutter/screens/main_screen.dart';
-import 'package:animated_loader_demo_flutter/screens/register_screen/register_screen.dart';
-import 'package:animated_loader_demo_flutter/utils/const_images.dart';
-import 'package:animated_loader_demo_flutter/widgets/custom_button.dart';
+import 'package:quizy/app_theme/app_colors.dart';
+import 'package:quizy/app_theme/style_helper.dart';
+import 'package:quizy/screens/login_screen/login_controller.dart';
+import 'package:quizy/screens/main_screen.dart';
+import 'package:quizy/screens/register_screen/register_screen.dart';
+import 'package:quizy/utils/const_images.dart';
+import 'package:quizy/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -78,11 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ).paddingOnly(bottom: loginController.isEmail.value ? 0.h : 12.h),
-            if (loginController.isEmail.value)
-              Text(
-                loginController.emailError.value,
-                style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp),
-              ).paddingOnly(bottom: 12.h),
+           Obx(()=>loginController.isEmail.value?Text(
+             loginController.emailError.value,
+             style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
+           ).paddingOnly(bottom: 12.h,top: 8.h):SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -112,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ).paddingOnly(bottom: 8.h),
-            Obx(
-              () => Container(
+            Obx(() => Container(
                 width: Get.width,
                 decoration: BoxDecoration(
                   color: AppColors.white,
@@ -147,10 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-              ),
-            ),
-            if (loginController.isPass.value)
-              Text(loginController.passError.value, style: StyleHelper.customStyle(color: AppColors.errorColor, size: 12.sp)),
+              )),
+            Obx(()=>loginController.isPass.value ?Text(loginController.passError.value, style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold)).paddingOnly(top: 8.h) :SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [SizedBox(), Text('Forgot password?', style: StyleHelper.customStyle(color: AppColors.blue, size: 12.sp, family: bold))],
@@ -165,6 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
               textStyle: StyleHelper.customStyle(color: AppColors.black, size: 16.sp, family: semiBold),
               onTap: (){
                 Get.offAll(()=>MainScreen(currentIndex: 0),transition: Transition.leftToRight,duration: Duration(milliseconds: 1000));
+               /* if(loginController.isValidate()){
+
+                }*/
               },
             ),
             Row(
