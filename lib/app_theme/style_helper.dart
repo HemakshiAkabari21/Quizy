@@ -14,14 +14,15 @@ class StyleHelper {
     double? size,
     String? family,
     TextDecoration? decoration,
-    Color? decorationColor
+    Color? decorationColor,double? height
   }){
     return TextStyle(
         fontFamily: family??regular,
         color: color ?? AppColors.black,
         fontSize: size??14.sp,
         decoration: decoration ?? TextDecoration.none,
-        decorationColor: decorationColor
+        decorationColor: decorationColor,
+        height: height
     );
   }
 }

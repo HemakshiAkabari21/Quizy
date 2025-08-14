@@ -22,7 +22,7 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   final Rx<ResultModel> result =
       ResultModel(
-        percentage: 40.0,
+        percentage: 80.0,
         attemptsLeft: 1,
         correct: 8,
         skipped: 1,
@@ -378,23 +378,18 @@ class _ResultScreenState extends State<ResultScreen> {
         ).paddingSymmetric(horizontal: 16.w, vertical: 40.h),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.only(left: 16.w,right: 16.w,top: 16.h),
+        padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h),
         decoration: BoxDecoration(
-            color: AppColors.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.lightGray,
-                blurRadius: 4,
-                offset: Offset(0, -2),
-              )
-            ],
-            border: Border(top: BorderSide(color: AppColors.grayBorder, width: 2.0))),
+          color: AppColors.white,
+          boxShadow: [BoxShadow(color: AppColors.lightGray, blurRadius: 4, offset: Offset(0, -2))],
+          border: Border(top: BorderSide(color: AppColors.grayBorder, width: 2.0)),
+        ),
         child: Row(
           children: [
             Expanded(
               child: GestureDetector(
-                onTap: (){
-                  Get.offAll(()=>MainScreen(currentIndex: 0),transition: Transition.leftToRight,duration: Duration(milliseconds: 1000));
+                onTap: () {
+                  Get.offAll(() => MainScreen(currentIndex: 0), transition: Transition.leftToRight, duration: Duration(milliseconds: 1000));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -412,13 +407,17 @@ class _ResultScreenState extends State<ResultScreen> {
             SizedBox(width: 16.w),
             Expanded(
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.back();
-                  Get.to(()=>QuizScreen());
+                  Get.to(() => QuizScreen());
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
-                  decoration: BoxDecoration(color: AppColors.blue,border: Border.all(color: AppColors.blue, width: 1.w), borderRadius: BorderRadius.circular(8.r)),
+                  decoration: BoxDecoration(
+                    color: AppColors.blue,
+                    border: Border.all(color: AppColors.blue, width: 1.w),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -511,7 +510,6 @@ class _ResultScreenState extends State<ResultScreen> {
         Text('Options', style: TextStyle(color: Colors.grey[600], fontSize: 12.sp, fontWeight: FontWeight.w500)).paddingOnly(bottom: 6.h),
 
         ...?question.answer?.asMap().entries.map((entry) {
-          int optionIndex = entry.key;
           var option = entry.value;
 
           bool isCorrectAnswer = option.answer == question.correctAnswer;
@@ -520,19 +518,21 @@ class _ResultScreenState extends State<ResultScreen> {
           Color bgColor = AppColors.white;
           Color textColor = AppColors.blackText;
 
-          // Handle skipped
+          /// Handle skipped
           if (question.questionStatus == QuestionStatus.skipped) {
-            bgColor = AppColors.white;
-            textColor = AppColors.blackText;
+            if (isCorrectAnswer) {
+              bgColor = AppColors.green;
+              textColor = AppColors.white;
+            }
           }
-          // Handle correct
+          /// Handle correct
           else if (question.questionStatus == QuestionStatus.correct) {
             if (isCorrectAnswer) {
               bgColor = AppColors.green;
               textColor = AppColors.white;
             }
           }
-          // Handle wrong
+          /// Handle wrong
           else if (question.questionStatus == QuestionStatus.wrong) {
             if (isUserAnswer && !isCorrectAnswer) {
               bgColor = AppColors.red;

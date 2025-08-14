@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:quizy/app_theme/app_colors.dart';
-import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:quizy/utils/const_keys.dart';
 import 'package:quizy/widgets/common_widgets.dart';
 import 'package:quizy/widgets/custom_loading_indicatore.dart';

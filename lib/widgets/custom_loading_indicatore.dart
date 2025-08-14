@@ -1,5 +1,8 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:quizy/app_theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:quizy/app_theme/style_helper.dart';
 
 class CustomLoadingIndicator extends StatefulWidget {
   final double? height;
@@ -102,9 +105,11 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> with Ti
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // Circular Progress Indicator with Countdown
+
+            Text('Attempt new questions in every reattempt',style: StyleHelper.customStyle(color: AppColors.black,size: 14.sp,family: semiBold),).paddingOnly(bottom: 16.h),
+            Text('Quiz starting in...',style: StyleHelper.customStyle(color: AppColors.gray.withOpacity(0.9),size: 14.sp,family: semiBold),).paddingOnly(bottom: 16.h),
             AnimatedBuilder(
               animation: _progressAnimation,
               builder: (context, child) {
@@ -146,7 +151,9 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator> with Ti
                   ),
                 );
               },
-            ),
+            ).paddingOnly(bottom: 40.h),
+            Text('Go premium to access all features',style: StyleHelper.customStyle(color: AppColors.black,size: 14.sp,family: semiBold),),
+            SizedBox(height: 120.h,),
           ],
         ),
       ),

@@ -154,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                             GestureDetector(onTap: (){
-                              Get.to(()=>SettingsScreen(),transition: Transition.leftToRight);
+                              Get.to(()=>SettingsScreen(),transition: Transition.leftToRight,duration: Duration(milliseconds: 1000));
 
                             }, child: Icon(Icons.settings, size: 30.sp, color: AppColors.blue).paddingOnly(right: 8.w)),
                           ],
@@ -170,9 +170,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ).paddingOnly(top: 16.h, left: 16.w, right: 16.w, bottom: 16.h),
                   Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    padding: const EdgeInsets.all(16),
+                    width:Get.width,
+                    margin:  EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.grey.shade300),
@@ -199,10 +199,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                           calendarFormat: CalendarFormat.month,
                           headerVisible: false,
+                          rowHeight: 35.h,
+                          sixWeekMonthsEnforced: false,
+
                           daysOfWeekStyle: DaysOfWeekStyle(
                             weekdayStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp, color: AppColors.darkGray),
                             weekendStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp, color: AppColors.darkGray),
                           ),
+
                           calendarBuilders: CalendarBuilders(
                             defaultBuilder: (context, day, focusedDay) {
                               bool isStreak = streakDays.any((d) => isSameDayCustom(d, day));
@@ -216,15 +220,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 }
                               }
                               return Container(
-                                decoration: BoxDecoration(color: isCurrentWeek ? AppColors.disableButton : null, borderRadius: radius),
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
+                                decoration: BoxDecoration(
+                                    color: isCurrentWeek ? AppColors.disableButton : null,
+                                    borderRadius: radius
+                                ),
                                 child: Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       if (isStreak)
-                                    SvgPicture.asset(AppImages.fireIcon, height: 24.h, width: 24.w)
-
-                               /* Icon(Icons.local_fire_department, color: Colors.orange, size: 24.sp)*/
+                                        SvgPicture.asset(AppImages.fireIcon, height: 20.h, width: 20.w)
                                       else
                                         Text(
                                           '${day.day}',
@@ -232,6 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             color: isCurrentWeek ? AppColors.blue : AppColors.black,
                                             size: 14.sp,
                                             family: bold,
+                                            height: 1.0,
                                           ),
                                         ),
                                     ],
@@ -240,23 +249,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
                             },
                             todayBuilder: (context, day, focusedDay) {
-                              return Container(decoration: BoxDecoration(color: AppColors.lightGray), child: Center(child: Text('${day.day}')));
+                              return Container(
+                                  margin: EdgeInsets.zero,
+                                  padding: EdgeInsets.zero,
+                                  decoration: BoxDecoration(color: AppColors.lightGray),
+                                  child: Center(
+                                      child: Text(
+                                        '${day.day}',
+                                        style: TextStyle(height: 1.0),
+                                      )
+                                  )
+                              );
                             },
                             selectedBuilder: (context, day, focusedDay) {
                               return Container(
+                                margin: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
                                 decoration: BoxDecoration(color: AppColors.lightGray),
-                                child: Center(child: Text('${day.day}', style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold))),
+                                child: Center(
+                                    child: Text(
+                                        '${day.day}',
+                                        style: TextStyle(
+                                          color: AppColors.blue,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1.0,
+                                        )
+                                    )
+                                ),
                               );
                             },
                           ),
                         ),
-
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              height: 60.h,
-                              width: 60.w,
+                              height: 50.h,
+                              width: 50.w,
                               padding: EdgeInsets.all(8.sp),
                               decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.disableButton),
                               child:  SvgPicture.asset(AppImages.fireIcon, height: 30.h, width: 30.w),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizy/widgets/animated_time_up.dart';
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({super.key});
@@ -15,7 +16,13 @@ class _StoreScreenState extends State<StoreScreen> with TickerProviderStateMixin
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text('Coming soon.....'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Coming soon.....'),
+          ],
+        ),
       ),
     );
   }

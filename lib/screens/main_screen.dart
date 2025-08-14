@@ -82,8 +82,8 @@ class _MainScreenState extends State<MainScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon,color: isSelected ? AppColors.black : Colors.blueAccent,size: 24.sp,).paddingOnly(bottom: 4.h),
-          Text(tabName,style: StyleHelper.customStyle(color: isSelected ? AppColors.black : Colors.blueAccent,size: 12.sp,family: semiBold ),)
+          Icon(icon,color: isSelected ? AppColors.bloodRed : AppColors.black,size: 24.sp,).paddingOnly(bottom: 4.h),
+          Text(tabName,style: StyleHelper.customStyle(color: isSelected ? AppColors.bloodRed : AppColors.black,size: 12.sp,family: semiBold ),)
         ],
       ),
     );

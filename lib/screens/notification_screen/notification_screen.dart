@@ -14,7 +14,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  RxBool isNotificationOn = false.obs;
+  RxBool isNotificationOn = true.obs;
 
   @override
   Widget build(BuildContext context) {

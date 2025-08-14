@@ -3,6 +3,7 @@ import 'package:quizy/app_theme/app_colors.dart';
 import 'package:quizy/app_theme/style_helper.dart';
 import 'package:quizy/model/quiz_model.dart';
 import 'package:quizy/screens/result_screen/result_screen.dart';
+import 'package:quizy/widgets/animated_time_up.dart';
 import 'package:quizy/widgets/custom_loading_indicatore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,8 +78,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   PageController pageController = PageController();
   int currentIndex = 0;
   late AnimationController controller;
-  late AnimationController bounceController;
-  late Animation<double> bounceAnimation;
   late Timer _timer;
   bool isLoading = true;
   int currentQuestion = 1;
@@ -119,8 +118,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = AnimationController(vsync: this, duration: const Duration(minutes: 5));
-    bounceController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
-    bounceAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(CurvedAnimation(parent: bounceController, curve: Curves.bounceInOut));
+
     Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         isLoading = false;
@@ -134,19 +132,15 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       setState(() {
         if (remainingTimeInSeconds > 0) {
           remainingTimeInSeconds--;
-          if (remainingTimeInSeconds <= 90 && !bounceController.isAnimating) {
-            bounceController.repeat(reverse: true);
-          }
         } else {
-          bounceController.stop();
           timer.cancel();
-          showTimeUpDialog();
+          Get.dialog(const AnimatedTimeUpDialog(), barrierDismissible: false, barrierColor: Colors.black.withOpacity(0.6));
         }
       });
     });
   }
 
-  void showTimeUpDialog() {
+  /*void showTimeUpDialog() {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -166,12 +160,12 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         );
       },
     );
-  }
+  }*/
 
   @override
   void dispose() {
     controller.dispose();
-    bounceController.dispose();
+
     _timer.cancel();
     super.dispose();
   }
@@ -197,7 +191,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               ).paddingOnly(bottom: 8.h).paddingSymmetric(horizontal: 16.w),
               // Timer Container
               Transform.scale(
-                scale: shouldBounce ? bounceAnimation.value : 1.0,
+                scale: 1.0,
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -256,20 +250,20 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                 ],
               ).paddingOnly(bottom: 8.h, right: 16.w, left: 16.w),
               Divider(color: AppColors.gray.withOpacity(0.5), thickness: 1.w).paddingOnly(bottom: 8.h),
-              /*Expanded(
+              Expanded(
                 child: PageView.builder(
                   controller: pageController,
                   physics: const NeverScrollableScrollPhysics(), // disables swipe
                   itemCount: questionList.length,
-                  itemBuilder: (context, index) {
-                    final quiz = questionList[index];
-                    RxBool isSelected = false.obs;
+                  itemBuilder: (context, questionIndex) {
+                    final quiz = questionList[questionIndex];
+                    quiz.userAnswer ??= '';
+                    final RxInt selectedIndex = (quiz.answer?.indexWhere((a) => a.answer == quiz.userAnswer) ?? -1).obs;
 
                     return SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Question Section
                           Text(
                             'Description',
                             style: TextStyle(color: Colors.grey[600], fontSize: 12.sp, fontWeight: FontWeight.w500),
@@ -284,62 +278,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                             'Options',
                             style: TextStyle(color: Colors.grey[600], fontSize: 12.sp, fontWeight: FontWeight.w500),
                           ).paddingOnly(bottom: 6.h),
-
-                          ...?quiz.answer?.map(
-                            (option) => GestureDetector(
-                              onTap: () {
-                                isSelected.toggle();
-                              },
-                              child: Obx(
-                                () => Container(
-                                  width: double.infinity,
-                                  margin: EdgeInsets.only(bottom: 12.h),
-                                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                                  decoration: BoxDecoration(
-                                    color: isSelected.value ? AppColors.blue : AppColors.white,
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(color: Colors.grey[300]!, width: 1),
-                                    boxShadow: [BoxShadow(color: AppColors.lightGray, blurRadius: 4, offset: const Offset(0, 2))],
-                                  ),
-                                  child: Text(
-                                    option.answer ?? '',
-                                    style: TextStyle(
-                                      color: isSelected.value ? AppColors.white : AppColors.blackText,
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ).paddingSymmetric(horizontal: 16.w),
-              ),*/
-              Expanded(
-                child: PageView.builder(
-                  controller: pageController,
-                  physics: const NeverScrollableScrollPhysics(), // disables swipe
-                  itemCount: questionList.length,
-                  itemBuilder: (context, questionIndex) {
-                    final quiz = questionList[questionIndex];
-                    quiz.userAnswer ??= '';
-                    final RxInt selectedIndex = (quiz.answer?.indexWhere(
-                          (a) => a.answer == quiz.userAnswer,) ?? -1).obs;
-
-                    return SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Description', style: TextStyle(color: Colors.grey[600], fontSize: 12.sp, fontWeight: FontWeight.w500,),).paddingOnly(bottom: 4.h),
-
-                          Text(quiz.question ?? '', style: TextStyle(color: Colors.black87, fontSize: 18.sp, fontWeight: FontWeight.w600,),).paddingOnly(bottom: 10.h),
-
-                          Text('Options', style: TextStyle(color: Colors.grey[600], fontSize: 12.sp, fontWeight: FontWeight.w500,),).paddingOnly(bottom: 6.h),
 
                           ...?quiz.answer?.asMap().entries.map((entry) {
                             int optionIndex = entry.key;
@@ -360,13 +298,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                                     color: isSelected ? AppColors.blue : AppColors.white,
                                     borderRadius: BorderRadius.circular(8.r),
                                     border: Border.all(color: Colors.grey[300]!, width: 1),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.lightGray,
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
-                                      )
-                                    ],
+                                    boxShadow: [BoxShadow(color: AppColors.lightGray, blurRadius: 4, offset: const Offset(0, 2))],
                                   ),
                                   child: Text(
                                     option.answer ?? '',
@@ -386,70 +318,21 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                     );
                   },
                 ).paddingSymmetric(horizontal: 16.w),
-              )
-
+              ),
             ],
           ),
         ),
         bottomNavigationBar: Container(
-          color: AppColors.white,
+          padding: EdgeInsets.only(top: 16.h),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [BoxShadow(color: AppColors.gray.withOpacity(0.5), blurRadius: 4, offset: Offset(0, -2))],
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Divider(thickness: 1.w, color: AppColors.gray.withOpacity(0.5)).paddingOnly(bottom: 8.h),
-
               Row(
                 children: [
-                  /*   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (currentIndex > 0) {
-                          setState(() {
-                            currentIndex--;
-                          });
-                          pageController.animateToPage(
-                            currentIndex,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
-                          );
-                        } else {Get.back();}
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 8.h),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: currentIndex > 0
-                                ? AppColors.amberOrange
-                                : AppColors.redisBrown,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              currentIndex > 0 ? Icons.arrow_back : Icons.close,
-                              color: currentIndex > 0
-                                  ? AppColors.amberOrange
-                                  : AppColors.redisBrown,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              currentIndex > 0 ? 'Previous' : 'Quit',
-                              style: TextStyle(
-                                color: currentIndex > 0
-                                    ? AppColors.amberOrange
-                                    : AppColors.redisBrown,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),*/
                   currentIndex == 0
                       ? Expanded(
                         child: GestureDetector(
@@ -518,11 +401,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                           setState(() {
                             currentIndex++;
                           });
-                          pageController.animateToPage(
-                            currentIndex,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
-                          );
+                          pageController.animateToPage(currentIndex, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
                         } else {
                           debugPrint("====Answer====");
                           for (var entry in questionList.asMap().entries) {
@@ -532,7 +411,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                             debugPrint("Answer: ${quiz.userAnswer}");
                           }
                           Get.back();
-                          Get.to(()=>ResultScreen());
+                          Get.to(() => ResultScreen(),transition: Transition.downToUp,duration: Duration(milliseconds: 1000));
                         }
                       },
                       child: Container(
@@ -545,7 +424,10 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(currentIndex == questionList.length - 1 ? 'Submit' : 'Next', style: TextStyle(color: AppColors.blue, fontSize: 16.sp, fontWeight: FontWeight.w600)),
+                            Text(
+                              currentIndex == questionList.length - 1 ? 'Submit' : 'Next',
+                              style: TextStyle(color: AppColors.blue, fontSize: 16.sp, fontWeight: FontWeight.w600),
+                            ),
                             SizedBox(width: 8.w),
                             const Icon(Icons.arrow_forward, color: AppColors.blue),
                           ],

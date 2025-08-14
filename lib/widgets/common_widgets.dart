@@ -7,7 +7,7 @@ import 'package:quizy/app_theme/style_helper.dart';
 import 'package:quizy/model/pdf_model.dart';
 import 'package:quizy/repository/api_services.dart';
 import 'package:quizy/repository/network_function.dart';
-import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:quizy/utils/const_images.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';

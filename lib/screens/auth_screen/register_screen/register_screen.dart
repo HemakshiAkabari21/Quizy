@@ -1,9 +1,9 @@
 import 'package:quizy/app_theme/app_colors.dart';
 import 'package:quizy/app_theme/style_helper.dart';
 import 'package:quizy/model/country_model.dart';
-import 'package:quizy/screens/login_screen/login_screen.dart';
+import 'package:quizy/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:quizy/screens/auth_screen/register_screen/register_controller.dart';
 import 'package:quizy/screens/main_screen.dart';
-import 'package:quizy/screens/register_screen/register_controller.dart';
 import 'package:quizy/utils/const_images.dart';
 import 'package:quizy/widgets/custom_button.dart';
 import 'package:quizy/widgets/expaded_custom_text_filed_for_single_selection.dart';
@@ -90,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.firstNameError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
-              ).paddingOnly(bottom: 12.h,top: 8.h),
+              ).paddingOnly(bottom: 12.h,top:4.h),
             Text('Last Name', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.lastNameError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
-              ).paddingOnly(bottom: 12.h,top: 8.h),
+              ).paddingOnly(bottom: 12.h,top: 4.h),
             Text('Email Address', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -164,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.emailAddressError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
-              ).paddingOnly(bottom: 12.h,top: 8.h),
+              ).paddingOnly(bottom: 12.h,top: 4.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -235,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.passwordError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp,family: semiBold),
-              ).paddingOnly(bottom: 12.h,top: 8.h),
+              ).paddingOnly(bottom: 12.h,top: 4.h),
             Text('Confirm Password', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             Container(
               width: Get.width,
@@ -280,7 +280,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.confirmPasswordError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp),
-              ).paddingOnly(bottom: 12.h,top: 8.h),
+              ).paddingOnly(bottom: 12.h,top: 4.h),
             Text('Country', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(bottom: 8.h),
             registerController.countryList.isEmpty
                 ? Text(
@@ -318,7 +318,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Text(
                 registerController.countryError.value,
                 style: StyleHelper.customStyle(color: AppColors.red, size: 12.sp),
-              ).paddingOnly(bottom: 20.h,top: 8.h),
+              ).paddingOnly(bottom: 20.h,top: 4.h),
             Row(
               children: [
                 Text('I am a:', style: StyleHelper.customStyle(color: AppColors.black, size: 14.sp, family: semiBold)).paddingOnly(right: 8.w),

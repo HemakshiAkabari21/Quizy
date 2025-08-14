@@ -1,8 +1,8 @@
-import 'package:quizy/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/default_route.dart';
+import 'package:quizy/screens/auth_screen/login_screen/login_screen.dart';
 
 import 'app_theme/app_colors.dart';
 

@@ -2,6 +2,7 @@ import 'package:quizy/app_theme/app_colors.dart';
 import 'package:quizy/app_theme/style_helper.dart';
 import 'package:quizy/model/histroy_model.dart';
 import 'package:quizy/screens/filter_screen/filter_screen.dart';
+import 'package:quizy/screens/result_screen/result_screen.dart';
 import 'package:quizy/utils/const_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -207,60 +208,65 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget historyCard({required HistoryModel historyData}) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border(left: BorderSide(color: AppColors.red, width: 5.w)),
+        GestureDetector(
+          onTap: (){
+            Get.to(()=>ResultScreen(),transition: Transition.downToUp,duration: Duration(milliseconds: 1000));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border(left: BorderSide(color: AppColors.red, width: 5.w)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Attempted on:', style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: medium)),
+                    Text(historyData.dayTime, style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: medium)),
+                  ],
+                ).paddingOnly(bottom: 4.h),
+                Divider(thickness: (1.5).w, color: AppColors.black),
+                Text(historyData.topic, style: StyleHelper.customStyle(color: AppColors.black, size: 16.sp, family: semiBold)),
+                Text('${historyData.percentage}', style: StyleHelper.customStyle(color: AppColors.red, size: 40.sp, family: semiBold)),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: historyData.correctAnswer,
+                      child: Container(
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: AppColors.green,
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(8.r), bottomLeft: Radius.circular(8.r)),
+                        ),
+                      ),
+                    ),
+                    Expanded(flex: (historyData.skippedAnswer + 1), child: Container(height: 8, color: AppColors.yellow)),
+                    Expanded(
+                      flex: historyData.wrongAnswer,
+                      child: Container(
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: AppColors.red,
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(8.r), bottomRight: Radius.circular(8.r)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ).paddingOnly(bottom: 8.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Time Taken:', style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: semiBold)),
+                    Text(historyData.timeTaken, style: StyleHelper.customStyle(color: AppColors.green, size: 14.sp, family: semiBold)),
+                  ],
+                ),
+              ],
+            ).paddingAll(16.sp),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Attempted on:', style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: medium)),
-                  Text(historyData.dayTime, style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: medium)),
-                ],
-              ).paddingOnly(bottom: 4.h),
-              Divider(thickness: (1.5).w, color: AppColors.black),
-              Text(historyData.topic, style: StyleHelper.customStyle(color: AppColors.black, size: 16.sp, family: semiBold)),
-              Text('${historyData.percentage}', style: StyleHelper.customStyle(color: AppColors.red, size: 40.sp, family: semiBold)),
-              Row(
-                children: [
-                  Expanded(
-                    flex: historyData.correctAnswer,
-                    child: Container(
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: AppColors.green,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.r), bottomLeft: Radius.circular(8.r)),
-                      ),
-                    ),
-                  ),
-                  Expanded(flex: (historyData.skippedAnswer + 1), child: Container(height: 8, color: AppColors.yellow)),
-                  Expanded(
-                    flex: historyData.wrongAnswer,
-                    child: Container(
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: AppColors.red,
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(8.r), bottomRight: Radius.circular(8.r)),
-                      ),
-                    ),
-                  ),
-                ],
-              ).paddingOnly(bottom: 8.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Time Taken:', style: StyleHelper.customStyle(color: AppColors.darkGray, size: 14.sp, family: semiBold)),
-                  Text(historyData.timeTaken, style: StyleHelper.customStyle(color: AppColors.green, size: 14.sp, family: semiBold)),
-                ],
-              ),
-            ],
-          ).paddingAll(16.sp),
         ),
         SizedBox(height: 16.h,)
       ],
